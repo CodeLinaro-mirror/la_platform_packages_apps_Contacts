@@ -393,8 +393,13 @@ public class QuickContactActivity extends ContactsActivity {
                     QuickContactActivity.this.startActivityForResult(intent, /* requestCode */ 0);
                 } else if (actionType == ActionType.CALL || actionType == ActionType.VIDEOCALL) {
                     String action = "com.android.dialer.LAUNCH_PRE_CALL";
-                    Intent preCallIntent = new Intent(intent);
-                    preCallIntent.setAction(action);
+                    Intent preCallIntent = new Intent(action, intent.getData());
+                    if (intent.hasExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS)) {
+                        Bundle callExtras = intent.getParcelableExtra(
+                                TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS);
+                        preCallIntent.putExtra(TelecomManager.EXTRA_OUTGOING_CALL_EXTRAS,
+                                callExtras);
+                    }
                     ImplicitIntentsUtil.startActivityInAppIfPossible(QuickContactActivity.this,
                             preCallIntent);
                 } else {
