@@ -391,12 +391,6 @@ public class QuickContactActivity extends ContactsActivity {
                 // add FLAG_ACTIVITY_NEW_TASK to the intent.
                 if (TACHYON_CALL_ACTION.equals(intent.getAction())) {
                     QuickContactActivity.this.startActivityForResult(intent, /* requestCode */ 0);
-                } else if (actionType == ActionType.CALL || actionType == ActionType.VIDEOCALL) {
-                    String action = "com.android.dialer.LAUNCH_PRE_CALL";
-                    Intent preCallIntent = new Intent(intent);
-                    preCallIntent.setAction(action);
-                    ImplicitIntentsUtil.startActivityInAppIfPossible(QuickContactActivity.this,
-                            preCallIntent);
                 } else {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     ImplicitIntentsUtil.startActivityInAppIfPossible(QuickContactActivity.this,
