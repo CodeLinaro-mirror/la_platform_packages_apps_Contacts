@@ -719,7 +719,8 @@ public class ContactEditorFragment extends Fragment
     public void onAccountsLoaded(List<AccountInfo> data) {
         mWritableAccounts = data;
         // The user may need to select a new account to save to
-        if (mAccountWithDataSet == null && mHasNewContact) {
+        if (mAccountWithDataSet == null && mHasNewContact
+                && mStatus != Status.SUB_ACTIVITY) {
             selectAccountAndCreateContact();
         }
 
