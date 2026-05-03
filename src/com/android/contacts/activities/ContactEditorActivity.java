@@ -281,7 +281,11 @@ public class ContactEditorActivity extends AppCompatContactsActivity
 
         getWindow().setHideOverlayWindows(true);
 
-        RequestPermissionsActivity.startPermissionActivityIfNeeded(this);
+        if (RequestPermissionsActivity.startPermissionActivityIfNeeded(this)) {
+            Log.d(TAG, "onCreate: permissions not yet granted, hashCode="
+                    + System.identityHashCode(this));
+            return;
+        }
 
         final Intent intent = getIntent();
         final String action = intent.getAction();
